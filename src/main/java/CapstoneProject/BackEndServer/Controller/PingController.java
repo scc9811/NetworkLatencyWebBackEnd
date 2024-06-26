@@ -3,31 +3,20 @@ package CapstoneProject.BackEndServer.Controller;
 
 import CapstoneProject.BackEndServer.Dto.ClientAvgTimeData;
 import CapstoneProject.BackEndServer.Dto.ICMPInboundAccessData;
-import CapstoneProject.BackEndServer.Dto.PingResponseTimeData;
-import CapstoneProject.BackEndServer.Dto.SignInRequest;
 import CapstoneProject.BackEndServer.Entity.TestResult;
-import CapstoneProject.BackEndServer.Entity.TestResultId;
-import CapstoneProject.BackEndServer.Repository.TestResultRepository;
-import CapstoneProject.BackEndServer.Repository.UserRepository;
-import CapstoneProject.BackEndServer.Service.JsonFormatService;
 import CapstoneProject.BackEndServer.Service.PingTestService;
-import CapstoneProject.BackEndServer.Service.UserService;
-import CapstoneProject.BackEndServer.Utils.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/ping")
@@ -59,7 +48,7 @@ public class PingController {
 
     @PostMapping("/storeResult")
     public ResponseEntity<String> storeResult(HttpServletRequest request, @RequestBody ClientAvgTimeData clientAvgTimeData) {
-        log.info("client's avg time : " + clientAvgTimeData.getAverageResponseTime());
+        log.info("client's avg time : " + clientAvgTimeData.getAverageLatency());
         String token = request.getHeader(HttpHeaders.AUTHORIZATION).split(" ")[1];
         boolean saveResult =  pingTestService.saveAndReturnStatus(token, clientAvgTimeData);
         return ResponseEntity.status(saveResult ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST).body("");

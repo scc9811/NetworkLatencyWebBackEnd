@@ -5,5 +5,5 @@ import lombok.Getter;
 
 @Getter
 public class ClientAvgTimeData {
-    private String averageResponseTime;
+    private String averageLatency;
 }

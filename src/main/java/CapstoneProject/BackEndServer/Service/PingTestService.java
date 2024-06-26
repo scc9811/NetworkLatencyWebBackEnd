@@ -56,7 +56,7 @@ public class PingTestService {
         TestResult testResult = TestResult
                 .builder()
                 .id(testResultId)
-                .averageTime(new BigDecimal(clientAvgTimeData.getAverageResponseTime()))
+                .averageTime(new BigDecimal(clientAvgTimeData.getAverageLatency()))
                 .build();
         log.info("testResult = " + testResult.toString());
 
