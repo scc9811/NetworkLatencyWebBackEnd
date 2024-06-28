@@ -36,19 +36,7 @@ public class UserController {
 
     @PostMapping("getJwt")
     public ResponseEntity<String> getJwt() {
-
         return ResponseEntity.ok().body(jwtDataJsonFormatService.formatToJson(new JwtData(userService.getJwt("user1@gmail.com"))));
-    }
-
-    @GetMapping("getSecuredPage")
-    public ResponseEntity<String> getSecuredPage() {
-        return ResponseEntity.ok().body("permitted");
-    }
-
-    @GetMapping("requestMyPageData")
-    public ResponseEntity<String> getMyPageData() {
-        // test ~~
-        return ResponseEntity.ok().body(jsonFormatService.formatToJson(new RequestResultData(true)));
     }
 
     @PostMapping("signIn")
@@ -76,15 +64,6 @@ public class UserController {
         else {
             return ResponseEntity.ok().body(jsonFormatService.formatToJson(new RequestResultData(signUpResult)));
         }
-    }
-
-    @PostMapping("isLoggedIn")
-    public ResponseEntity<String> isLoggedIn(HttpServletRequest request) {
-//        String token = request.getHeader(HttpHeaders.AUTHORIZATION).split(" ")[1];
-//        if(JwtUtil.isExpired(token, secretKey)) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("isExpired");
-//        }
-        return ResponseEntity.ok().body("isAuthenticated");
     }
 
     @PostMapping("getUserNickName")

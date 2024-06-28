@@ -30,21 +30,12 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         httpRequest -> httpRequest
-                                .requestMatchers("/user/signUp").permitAll()
-                                .requestMatchers("/user/signIn").permitAll()
-                                .requestMatchers("/user/getJwt").permitAll()
+                                .requestMatchers("/user/getUserNickName").authenticated()
+                                .requestMatchers("/ping/getTestResult").authenticated()
+                                .requestMatchers("/ping/storeResult").authenticated()
 
-                                .requestMatchers("/map/*").permitAll()
 
-                                .requestMatchers("/ping/isICMPInboundAllowed").permitAll()
-                                .requestMatchers("/ping/test").permitAll()
-                                .requestMatchers("/ping/getClientIP").permitAll()
-//                                .requestMatchers("/ping/*").permitAll()
-//                                .requestMatchers("/ping/storeResult").authenticated()
-                                .requestMatchers("/socketConnection").permitAll()
-                                .requestMatchers("/networkLatencyWebSocketConnection").permitAll()
-                                .requestMatchers("/actuator/beans").permitAll()
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
 //                .addFilterBefore(new JwtFilter(secretKey), UsernamePasswordAuthenticationFilter.class);
                 .addFilterAfter(new JwtFilter(secretKey), UsernamePasswordAuthenticationFilter.class);

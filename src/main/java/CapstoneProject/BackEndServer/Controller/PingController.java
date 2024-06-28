@@ -32,8 +32,8 @@ public class PingController {
 
     @GetMapping("/isICMPInboundAllowed")
     public ResponseEntity<ICMPInboundAccessData> isICMPInboundAllowed(HttpServletRequest request){
-//        boolean isAllowedICMP = pingTestService.getIcmpPacketAllowed(request.getRemoteAddr());
-        boolean isAllowedICMP = pingTestService.getIcmpPacketAllowed("127.0.0.1");
+        boolean isAllowedICMP = pingTestService.getIcmpPacketAllowed(request.getRemoteAddr());
+//        boolean isAllowedICMP = pingTestService.getIcmpPacketAllowed("127.0.0.1");
         ICMPInboundAccessData data = new ICMPInboundAccessData();
         data.setAllowed(isAllowedICMP);
         log.info("isAllowed = " + isAllowedICMP);
