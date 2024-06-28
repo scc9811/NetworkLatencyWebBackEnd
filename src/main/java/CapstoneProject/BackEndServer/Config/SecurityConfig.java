@@ -41,6 +41,7 @@ public class SecurityConfig {
 //                                .requestMatchers("/ping/storeResult").authenticated()
                                 .requestMatchers("/socketConnection").permitAll()
                                 .requestMatchers("/networkLatencyWebSocketConnection").permitAll()
+                                .requestMatchers("/actuator/beans").permitAll()
                                 .anyRequest().authenticated()
                 )
 //                .addFilterBefore(new JwtFilter(secretKey), UsernamePasswordAuthenticationFilter.class);
