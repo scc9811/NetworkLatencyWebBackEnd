@@ -34,6 +34,8 @@ public class SecurityConfig {
                                 .requestMatchers("/user/signIn").permitAll()
                                 .requestMatchers("/user/getJwt").permitAll()
 
+                                .requestMatchers("/map/*").permitAll()
+
                                 .requestMatchers("/ping/isICMPInboundAllowed").permitAll()
                                 .requestMatchers("/ping/test").permitAll()
                                 .requestMatchers("/ping/getClientIP").permitAll()
