@@ -5,9 +5,11 @@ import CapstoneProject.BackEndServer.Dto.GeoLocationData;
 import CapstoneProject.BackEndServer.Service.MapService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,6 +18,8 @@ import java.net.URL;
 @Controller
 @RequestMapping("/map")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
+@Slf4j
 public class MapController {
 
     private final MapService mapservice;
@@ -23,6 +27,7 @@ public class MapController {
     @GetMapping("/getClientLocation")
     public ResponseEntity<GeoLocationData> getClientLocation(HttpServletRequest request) {
         GeoLocationData clientLocation = mapservice.getLocation(request.getRemoteAddr());
+        log.info("addr = " + request.getRemoteAddr());
         if(clientLocation == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         return ResponseEntity.ok().body(clientLocation);
     }
