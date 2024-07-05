@@ -26,6 +26,7 @@ public class MapController {
 
     @GetMapping("/getClientLocation")
     public ResponseEntity<GeoLocationData> getClientLocation(HttpServletRequest request) {
+        log.info("CORS : " );
         GeoLocationData clientLocation = mapservice.getLocation(request.getRemoteAddr());
         log.info("addr = " + request.getRemoteAddr());
         if(clientLocation == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);

@@ -17,7 +17,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        // setAllowedOrigins("*") --> 나중에 프론트엔드 서버 주소로 바꿔야됨.
-        registry.addHandler(networkLatencyWebSocketHandler, "/networkLatencyWebSocketConnection").setAllowedOrigins("*");
+        registry.addHandler(networkLatencyWebSocketHandler, "/networkLatencyWebSocketConnection").setAllowedOrigins("http://scc9811.site:3000");
     }
 }
