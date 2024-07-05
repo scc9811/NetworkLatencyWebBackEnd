@@ -18,7 +18,7 @@ import java.net.URL;
 @Controller
 @RequestMapping("/map")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 @Slf4j
 public class MapController {
 
@@ -26,7 +26,6 @@ public class MapController {
 
     @GetMapping("/getClientLocation")
     public ResponseEntity<GeoLocationData> getClientLocation(HttpServletRequest request) {
-        log.info("CORS : " );
         GeoLocationData clientLocation = mapservice.getLocation(request.getRemoteAddr());
         log.info("addr = " + request.getRemoteAddr());
         if(clientLocation == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);

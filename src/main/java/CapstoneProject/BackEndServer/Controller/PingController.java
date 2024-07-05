@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/ping")
 @RequiredArgsConstructor
-@CrossOrigin(origins="*")
+//@CrossOrigin(origins="*")
 @Slf4j
 public class PingController {
 
