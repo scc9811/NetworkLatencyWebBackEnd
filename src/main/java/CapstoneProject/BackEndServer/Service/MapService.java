@@ -45,21 +45,19 @@ public class MapService {
             String jsonResponse = response.toString();
             JSONObject jsonObject = new JSONObject(jsonResponse);
 
-            // response 형태 :
-            // {
-            //	"location": {
-            //		"region": {
-            //			"latitude": 37.7749,
-            //			"longitude": -122.4194
-            //		}
-            //	}
-            //}
+            // response 형태
+            //  {
+            //      "location": {
+            //          "latitude": ~~
+            //          "longitude": ~~
+            //      }
+            //  }
 
             // location 객체
             JSONObject location = jsonObject.getJSONObject("location");
 
-            // region 객체
-            JSONObject region = location.getJSONObject("region");
+            log.info("\n" + "location\n" + location.toString());
+
 
 
 
@@ -71,11 +69,12 @@ public class MapService {
 //            geoLocationData.setLatitude(latLong[0]);
 //            geoLocationData.setLongitude(latLong[1]);
 
-            geoLocationData.setLatitude(String.valueOf(region.getDouble("latitude")));
-            geoLocationData.setLongitude(String.valueOf(region.getDouble("longitude")));
+            geoLocationData.setLatitude(String.valueOf(location.getDouble("latitude")));
+            geoLocationData.setLongitude(String.valueOf(location.getDouble("longitude")));
 
-            log.info(String.valueOf(region.getDouble("latitude")));
-            log.info(String.valueOf(region.getDouble("longitude")));
+            log.info(String.valueOf(location.getDouble("latitude")));
+            log.info(String.valueOf(location.getDouble("longitude")));
+
 
             return geoLocationData;
         }
