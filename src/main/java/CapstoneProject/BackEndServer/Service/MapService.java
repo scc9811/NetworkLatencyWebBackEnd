@@ -17,7 +17,8 @@ public class MapService {
     private String token;
 
     public GeoLocationData getLocation(String ip) {
-        String url = "https://ipinfo.io/" + ip + "?token=" + token;
+//        String url = "https://ipinfo.io/" + ip + "?token=" + token;
+        String url = "https://api.ip2location.io/?key=" + token + "&ip=" + ip;
         try{
             URL obj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
@@ -32,7 +33,6 @@ public class MapService {
 
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
-                System.out.println(inputLine);
             }
 
             in.close();
@@ -42,12 +42,16 @@ public class MapService {
             JSONObject jsonObject = new JSONObject(jsonResponse);
 
             // "loc" 키로부터 위도와 경도 추출
-            String loc = jsonObject.getString("loc");
-            String[] latLong = loc.split(",");
+//            String loc = jsonObject.getString("loc");
+//            String[] latLong = loc.split(",");
 
             GeoLocationData geoLocationData = new GeoLocationData();
-            geoLocationData.setLatitude(latLong[0]);
-            geoLocationData.setLongitude(latLong[1]);
+//            geoLocationData.setLatitude(latLong[0]);
+//            geoLocationData.setLongitude(latLong[1]);
+
+
+            geoLocationData.setLatitude(jsonObject.getString("latitude"));
+            geoLocationData.setLongitude(jsonObject.getString("longitude"));
 
             return geoLocationData;
         }
